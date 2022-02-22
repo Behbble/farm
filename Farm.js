@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 
 class Farm {
 	static version = "1.0.0";
@@ -15,7 +16,11 @@ class Farm {
 
 	constructor(settings={}) {
 		this.port = settings.port || 8080;
-		this.server = http.createServer();
+		this.server = settings.httpsOptions ? (
+			https.createServer(settings.httpsOptions);
+		) : (
+			http.createServer();
+		);
 
 		this.lastStatus = {
 			capacity: 0,
