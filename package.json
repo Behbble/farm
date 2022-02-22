@@ -1,5 +1,5 @@
 {
-  "name": "farm",
+  "name": "@behbble/farm",
   "version": "1.0.0",
   "description": "Behbble Farm Server API",
   "main": "index.js",
