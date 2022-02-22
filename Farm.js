@@ -17,9 +17,9 @@ class Farm {
 	constructor(settings={}) {
 		this.port = settings.port || 8080;
 		this.server = settings.httpsOptions ? (
-			https.createServer(settings.httpsOptions);
+			https.createServer(settings.httpsOptions)
 		) : (
-			http.createServer();
+			http.createServer()
 		);
 
 		this.lastStatus = {
