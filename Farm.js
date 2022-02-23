@@ -44,10 +44,10 @@ class Farm {
 			response.setHeader('Content-Type', 'application/json');
 			response.setHeader('Access-Control-Allow-Origin', '*');
 			response.setHeader('Access-Control-Request-Method', '*');
-			response.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+			response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
 			response.setHeader('Access-Control-Allow-Headers', '*');
 
-			if(url === "/info") {
+			if(url.startsWith("/info")) {
 				sendResponse({
 					is_farm: true,
 					name: "Untitled Farm",
@@ -55,7 +55,7 @@ class Farm {
 					version: this.version,
 					...(await this.info() || {})
 				});
-			} else if(url === "/status") {
+			} else if(url.startsWith("/status")) {
 				const status = {
 					capacity: 0,
 					...(await this.status() || {})
@@ -64,7 +64,7 @@ class Farm {
 				this.lastStatus = status;
 
 				sendResponse(status);
-			} else if(url === "/call_shepard" && method === "POST") {
+			} else if(url.startsWith("/call_shepard") && method === "POST") {
 				let farm_query = body.query;
 				if(typeof farm_query === "undefined") return sendResponse({
 					err: "A Shepard Query could not be found",
